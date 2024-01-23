@@ -45,11 +45,11 @@ public class Client {
 
     @Override
     public String toString() {
-        return "Cliente{" +
-                "Nome='" + name + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", idade=" + age +
-                ", genero=" + gender.getDescription() +
+        return "Cliente {" +
+                " Nome = '" + name + '\'' +
+                ", cpf = '" + cpf + '\'' +
+                ", idade = " + age +
+                ", genêro = " + gender.getDescription() +
                 '}';
     }
 

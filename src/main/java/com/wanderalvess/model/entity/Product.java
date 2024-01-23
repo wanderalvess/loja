@@ -4,10 +4,18 @@ import java.util.Objects;
 
 //Produto
 public class Product {
+    private Integer code;
     private String description;
     private Double price;
     private Integer stock;
-    private Integer code;
+
+    public Integer getCode() {
+        return code;
+    }
+
+    public void setCode(Integer code) {
+        this.code = code;
+    }
 
     public String getDescription() {
         return description;
@@ -33,21 +41,20 @@ public class Product {
         this.stock = stock;
     }
 
-    public Integer getCode() {
-        return code;
-    }
-
-    public void setCode(Integer code) {
+    public Product(Integer code, String description, Double price, Integer stock) {
         this.code = code;
+        this.description = description;
+        this.price = price;
+        this.stock = stock;
     }
 
     @Override
     public String toString() {
-        return "Product{" +
-                "description='" + description + '\'' +
-                ", price=" + price +
-                ", stock=" + stock +
-                ", code=" + code +
+        return "Produto {" +
+                " codigo = " + code +
+                ", descrição = '" + description + '\'' +
+                ", preço = " + price +
+                ", estoque = " + stock +
                 '}';
     }
 

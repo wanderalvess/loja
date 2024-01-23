@@ -36,10 +36,10 @@ public class Vendor {
 
     @Override
     public String toString() {
-        return "Vendedor{" +
-                "nome='" + name + '\'' +
-                ", idade=" + age +
-                ", Genero=" + gender.getDescription() +
+        return "Vendedor {" +
+                " nome = '" + name + '\'' +
+                ", idade = " + age +
+                ", Genero = " + gender.getDescription() +
                 '}';
     }
 
