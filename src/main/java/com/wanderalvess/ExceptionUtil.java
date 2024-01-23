@@ -8,6 +8,11 @@ public class ExceptionUtil extends Exception {
 
     }
 
+    public String getErrorSaleQuantityStock() {
+        return CodeErrors.ERROR_SALE_QUANTITY_STOCK.toString();
+
+    }
+
     public String getErrorGender() {
         return CodeErrors.ERROR_GENDER.toString();
 

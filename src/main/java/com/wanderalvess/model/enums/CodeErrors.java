@@ -8,6 +8,7 @@ public enum CodeErrors {
     ERROR_SALE(5,"Erro ao realizar venda, confirme se preencheu todos os campos corretamento","Erro ao realizar venda"),
     CUSTOMER_WITHDREW_FROM_SALE(6,"Cliente desistiu de realizar a compra do produto","Venda não realizada"),
     ERROR_GENDER(7,"Você deve selecionar entre Masculino ou Feminino","Erro ao selecionar Genêro"),
+    ERROR_SALE_QUANTITY_STOCK(8,"Não possuímos essa quantidade no estoque, por favor digite a quantidade até:","Erro vender mais que o estoque"),
     ;
 
     private final Integer code;

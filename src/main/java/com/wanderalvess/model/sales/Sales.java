@@ -62,26 +62,33 @@ public class Sales extends ExceptionUtil{
         }
     }
 
-    private void processSaleProduct() {
-        System.out.println();
-        System.out.println("Para vender o produto: " + product.getDescription()
-                + ", digite a quantidade a ser comprada: " + "(Estoque: " + product.getStock() + ")");
-        Integer quantitySale = scanner.nextInt();
+    private void processSaleProduct() throws ExceptionUtil {
 
-        validateQuantityForSale(quantitySale);
+        Integer quantitySale = null;
 
-        Integer newStock = product.getStock() - quantitySale;
-        product.setStock(newStock);
-        calculateValueSale(quantitySale);
+        try {
+            System.out.println();
+            System.out.println("Para vender o produto: " + product.getDescription()
+                    + ", digite a quantidade a ser comprada: " + "(Estoque: " + product.getStock() + ")");
+            quantitySale = scanner.nextInt();
 
-        System.out.println("Nova quantidade do produto em estoque: " + product.getDescription() + " é de " + product.getStock());
-        System.out.println();
+            validateQuantityForSale(quantitySale);
+        } catch (ExceptionUtil e) {
+            System.out.println(e.getErrorSaleQuantityStock());
+        } finally {
+            Integer newStock = product.getStock() - quantitySale;
+            product.setStock(newStock);
+            calculateValueSale(quantitySale);
+
+            System.out.println("Nova quantidade do produto em estoque: " + product.getDescription() + " é de " + product.getStock());
+            System.out.println();
+        }
+
     }
 
-    private void validateQuantityForSale(Integer quantitySale) {
+    private void validateQuantityForSale(Integer quantitySale) throws ExceptionUtil {
         if (quantitySale > product.getStock()) {
-            System.out.println("Não possuímos essa quantidade no estoque, por favor digite a quantidade até: " + product.getStock());
-            processSaleProduct();
+            throw new ExceptionUtil();
         }
     }
 
