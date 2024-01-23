@@ -39,7 +39,7 @@ public class Vendor {
         return "Vendedor {" +
                 " nome = '" + name + '\'' +
                 ", idade = " + age +
-                ", Genero = " + gender.getDescription() +
+                ", genêro = " + gender.getDescription() +
                 '}';
     }
 

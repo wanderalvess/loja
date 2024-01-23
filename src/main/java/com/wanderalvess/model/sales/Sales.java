@@ -1,5 +1,6 @@
 package com.wanderalvess.model.sales;
 
+import com.wanderalvess.ExceptionUtil;
 import com.wanderalvess.model.entity.Client;
 import com.wanderalvess.model.entity.Product;
 import com.wanderalvess.model.entity.Vendor;
@@ -10,7 +11,7 @@ import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Sales {
+public class Sales extends ExceptionUtil{
 
     private Product product;
     private Client client = new Client();
@@ -19,13 +20,13 @@ public class Sales {
     Scanner scanner = new Scanner(System.in);
     Random random = new Random();
 
-    public void startSalesOperation() {
+    public void startSalesOperation() throws ExceptionUtil {
         System.out.println("Olá!");
         System.out.println("Iniciando Sistema de vendas...");
         verifyInitSales();
     }
 
-    private void verifyInitSales() {
+    private void verifyInitSales() throws ExceptionUtil {
         System.out.println("Deseja iniciar a operação de vendas de produtos ?");
         System.out.println("Digite 1 - Sim ou Digite 2 - não.");
         Integer initSales = scanner.nextInt();
@@ -41,7 +42,7 @@ public class Sales {
         }
     }
 
-    public void initSales() {
+    public void initSales() throws ExceptionUtil {
         verifyStockProducts();
         System.out.println();
         System.out.println("Para iniciar a venda de produtos, cadastre os dados do vendedor e do cliente: ");
@@ -114,7 +115,7 @@ public class Sales {
         System.out.println("Informe a descrição do produto: ");
         String descriptionProduct = scanner.nextLine();
 
-        System.out.println("Informe o preço do produto: ex.: 2,50 ");
+        System.out.println("Informe o preço do produto: ex.: R$ 2,50 ");
         Double priceProduct = scanner.nextDouble();
 
         System.out.println("Informe o estoque do produto: ex.: 5  ");
@@ -129,40 +130,54 @@ public class Sales {
     }
 
     public void registerClient() {
-        System.out.println("Iniciando cadastro de novo cliente... ");
-        System.out.println("Informe o CPF para prosseguir o cadastro: ");
-        client.setCpf(scanner.nextLine());
+        try {
+            System.out.println("Iniciando cadastro de novo cliente... ");
+            System.out.println("Informe o CPF para prosseguir o cadastro: ");
+            client.setCpf(scanner.nextLine());
 
-        System.out.println("Digite o nome do novo cliente: ");
-        client.setName(scanner.nextLine());
+            System.out.println("Digite o nome do novo cliente: ");
+            client.setName(scanner.nextLine());
 
-        System.out.println("Digite a idade do cliente: ");
-        client.setAge(scanner.nextInt());
-        scanner.nextLine();
+            System.out.println("Digite a idade do cliente: ");
+            client.setAge(scanner.nextInt());
+            scanner.nextLine();
 
-        String gender = registerGender(scanner, client);
+            String gender = registerGender(scanner, client);
 
-        System.out.println("Os dados cadastrados são: ");
-        System.out.println(client.toString());
-        System.out.println();
+            System.out.println("Os dados cadastrados são: ");
+            System.out.println(client.toString());
+            System.out.println();
+        } catch (ExceptionUtil e) {
+            System.out.println(e.getErrorClient());
+
+        }
 
     }
 
-    private String registerGender(Scanner scanner, Object o) {
-        System.out.println("Digite o Gênero (Masculino ou Feminino): ");
-        String gender = scanner.nextLine().toLowerCase();
-        validateGender(gender, o, scanner);
+    private String registerGender(Scanner scanner, Object o) throws ExceptionUtil {
+        String gender = new String();
+        try {
+            System.out.println("Digite o Gênero (Masculino ou Feminino): ");
+            gender = scanner.nextLine().toLowerCase();
+            validateGender(gender, o, scanner);
+        } catch (ExceptionUtil e){
+            System.out.println(e.getErrorGender());
+            registerGender(scanner, o);
+        }
         return gender;
     }
 
-    private void validateGender(String gender, Object o, Scanner scanner) {
+    private void validateGender(String gender, Object o, Scanner scanner) throws ExceptionUtil{
+
         if (o instanceof Client client) {
             if (gender.equalsIgnoreCase("masculino")) {
                 client.setGender(Gender.MALE);
             } else if (gender.equalsIgnoreCase("feminino")) {
                 client.setGender(Gender.FEMALE);
             } else {
-                System.out.println("Opção inválida. Tente novamente.");
+                throw new ExceptionUtil();
+            }
+            if (client.getGender() == null){
                 registerGender(scanner, o);
             }
         } else if (o instanceof Vendor vendor) {
@@ -171,14 +186,16 @@ public class Sales {
             } else if (gender.equalsIgnoreCase("feminino")) {
                 vendor.setGender(Gender.FEMALE);
             } else {
-                System.out.println("Opção inválida. Tente novamente.");
+                throw new ExceptionUtil();
+            }
+            if (vendor.getGender() == null){
                 registerGender(scanner, o);
             }
         }
 
     }
 
-    public void registerVendor() {
+    public void registerVendor() throws ExceptionUtil {
         System.out.println("Iniciando cadastro de novo vendedor... ");
         System.out.println("Digite o nome do novo vendedor: ");
         vendor.setName(scanner.nextLine());
