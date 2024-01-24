@@ -1,13 +1,14 @@
 package com.wanderalvess.model.entity;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 //Produto
 public class Product {
     private Integer code;
     private String description;
-    private Double price;
-    private Integer stock;
+    private BigDecimal price;
+    private BigDecimal stock;
 
     public Integer getCode() {
         return code;
@@ -25,26 +26,26 @@ public class Product {
         this.description = description;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-    public Integer getStock() {
+    public BigDecimal getStock() {
         return stock;
     }
 
-    public void setStock(Integer stock) {
+    public void setStock(BigDecimal stock) {
         this.stock = stock;
     }
 
     public Product() {
     }
 
-    public Product(Integer code, String description, Double price, Integer stock) {
+    public Product(Integer code, String description, BigDecimal price, BigDecimal stock) {
         this.code = code;
         this.description = description;
         this.price = price;

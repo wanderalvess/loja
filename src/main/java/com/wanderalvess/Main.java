@@ -1,5 +1,6 @@
 package com.wanderalvess;
 
+import com.wanderalvess.model.exception.ExceptionUtil;
 import com.wanderalvess.model.sales.Sales;
 
 public class Main {

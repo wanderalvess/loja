@@ -1,4 +1,4 @@
-package com.wanderalvess;
+package com.wanderalvess.model.exception;
 
 import com.wanderalvess.model.enums.CodeErrors;
 
