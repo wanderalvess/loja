@@ -140,7 +140,7 @@ public class Sales extends ExceptionUtil {
 
     private void registerProduct() throws ExceptionUtil {
         try {
-            if(product == null || product.) {
+            if(product == null) {
                 System.out.println("O sistema não possui produtos cadastrados, por favor adicione um produto abaixo.");
             }
 
