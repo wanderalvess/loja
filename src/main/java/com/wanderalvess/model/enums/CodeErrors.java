@@ -12,6 +12,7 @@ public enum CodeErrors {
     ERROR_GENDER(9,"Você deve selecionar entre Masculino ou Feminino","Erro -  ao selecionar Genêro"),
     ERROR_SALE_QUANTITY_STOCK(10,"Não possuímos essa quantidade no estoque, por favor digite a quantidade até:","Erro - Venda mais que o estoque"),
     ERROR_INITIAL(11,"O número informado, não corresponde com as opções: 1 para Sim e 2 para não","Erro - ao iniciar programa"),
+    ERROR_AGE(12,"Erro ao preencher a idade, confirme se preencheu o campos corretamento","Erro - ao cadastrar idade"),
 
     ;
 

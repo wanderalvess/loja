@@ -1,11 +1,11 @@
 package com.wanderalvess;
 
-import com.wanderalvess.model.exception.ExceptionUtil;
-import com.wanderalvess.model.sales.Sales;
+import com.wanderalvess.exceptions.ExceptionUtil;
+import com.wanderalvess.model.service.sales.StartOperationSales;
 
 public class Main {
     public static void main(String[] args) throws ExceptionUtil {
-        Sales sales = new Sales();
-        sales.startSalesOperation();
+        StartOperationSales startOperationSales = new StartOperationSales();
+        startOperationSales.startSalesOperation();
     }
 }

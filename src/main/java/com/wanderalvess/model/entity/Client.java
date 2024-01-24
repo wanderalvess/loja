@@ -2,13 +2,14 @@ package com.wanderalvess.model.entity;
 
 import com.wanderalvess.model.enums.Gender;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 //Cliente
 public class Client {
     private String name;
     private String cpf;
-    private Integer age;
+    private BigDecimal age;
     private Gender gender;
 
     public String getName() {
@@ -27,11 +28,11 @@ public class Client {
         this.cpf = cpf;
     }
 
-    public Integer getAge() {
+    public BigDecimal getAge() {
         return age;
     }
 
-    public void setAge(Integer age) {
+    public void setAge(BigDecimal age) {
         this.age = age;
     }
 
