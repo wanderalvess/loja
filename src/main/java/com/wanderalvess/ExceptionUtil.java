@@ -18,6 +18,13 @@ public class ExceptionUtil extends Exception {
 
     }
 
+    public ExceptionUtil() {
+    }
+
+    public ExceptionUtil(String message) {
+        super(message);
+    }
+
     public String getErrorClientWithdrew() {
         return CodeErrors.CUSTOMER_WITHDREW_FROM_SALE.toString();
     }

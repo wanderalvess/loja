@@ -4,72 +4,88 @@ import com.wanderalvess.ExceptionUtil;
 import com.wanderalvess.model.entity.Client;
 import com.wanderalvess.model.entity.Product;
 import com.wanderalvess.model.entity.Vendor;
+import com.wanderalvess.model.enums.CodeErrors;
 import com.wanderalvess.model.enums.Gender;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Sales extends ExceptionUtil{
-
-    private Product product;
+public class Sales extends ExceptionUtil {
+    private Product product = new Product();
     private Client client = new Client();
     private Vendor vendor = new Vendor();
 
     Scanner scanner = new Scanner(System.in);
     Random random = new Random();
 
-    public void startSalesOperation() throws ExceptionUtil {
-        System.out.println("Olá!");
-        System.out.println("Iniciando Sistema de vendas...");
-        verifyInitSales();
+    public void startSalesOperation() {
+        try {
+            System.out.println("Olá!");
+            System.out.println("Iniciando Sistema de vendas...");
+            verifyInitSales();
+        } catch (ExceptionUtil e) {
+            System.out.println(e.getErrorSale());
+        }
     }
 
     private void verifyInitSales() throws ExceptionUtil {
         System.out.println("Deseja iniciar a operação de vendas de produtos ?");
         System.out.println("Digite 1 - Sim ou Digite 2 - não.");
         Integer initSales = scanner.nextInt();
-
-        if (initSales.equals(1)) {
-            initSales();
-        } else if (initSales.equals(2)) {
-            System.out.println("Caso deseje iniciar uma venda, reinicie o processo. Obrigado!");
-            System.out.println("Programa finalizado.");
-        } else {
-            System.out.println("O número " + initSales.toString() + ", não corresponde com as opções: 1 para Sim e 2 para não");
+        try {
+            if (initSales.equals(1)) {
+                initSales();
+            } else if (initSales.equals(2)) {
+                System.out.println("Caso deseje iniciar uma venda, reinicie o processo. Obrigado!");
+                System.out.println("Programa finalizado.");
+            } else {
+                throw new ExceptionUtil(CodeErrors.ERROR_INITIAL.getDetail());
+            }
+        } catch (ExceptionUtil e) {
+            System.out.println(e.getMessage());
             verifyInitSales();
         }
     }
 
-    public void initSales() throws ExceptionUtil {
-        verifyStockProducts();
-        System.out.println();
-        System.out.println("Para iniciar a venda de produtos, cadastre os dados do vendedor e do cliente: ");
-        registerVendor();
-        registerClient();
-        System.out.println("Iniciando processamento da venda de produtos...");
-        processSaleProduct();
-        System.out.println("Processo de vendas finalizado");
+    public void initSales() {
+        try {
+            verifyStockProducts();
+            System.out.println();
+            System.out.println("Para iniciar a venda de produtos, cadastre os dados do vendedor e do cliente: ");
+            registerVendor();
+            registerClient();
+            processSaleProduct();
+            System.out.println("Processo de vendas finalizado");
+        } catch (ExceptionUtil e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getErrorSale());
+        }
     }
 
     public void verifyStockProducts() {
         System.out.println("Verificando se possui produtos em estoque para venda...");
-
-        if (product == null) {
-            System.out.println("O sistema não possui produtos cadastrados, por favor adicione um produto abaixo.");
-            registerProduct();
+        try {
+            if (product.getCode() == null) {
+                registerProduct();
+            }
+        } catch (ExceptionUtil e) {
+            System.out.println(e.getMessage());
         }
     }
 
-    private void processSaleProduct() throws ExceptionUtil {
+    private void processSaleProduct() {
+        System.out.println("Iniciando processamento da venda de produtos...");
 
-        Integer quantitySale = null;
+        Integer quantitySale = 0;
 
         try {
             System.out.println();
             System.out.println("Para vender o produto: " + product.getDescription()
                     + ", digite a quantidade a ser comprada: " + "(Estoque: " + product.getStock() + ")");
+            System.out.println();
             quantitySale = scanner.nextInt();
 
             validateQuantityForSale(quantitySale);
@@ -105,35 +121,77 @@ public class Sales extends ExceptionUtil{
         System.out.println();
         System.out.println("Finalizando compra...");
         System.out.println();
-        System.out.println(" **** Recibo da Compra **** ");
+        System.out.println("*********************************************************");
+        System.out.println("*********************************************************");
+        System.out.println("******************** Recibo da Compra *******************");
         System.out.println();
-        System.out.println("Produto: " + product.getDescription());
-        System.out.println("Quantidade: " + quantitySale);
-        System.out.println("Valor Unitário: " + "R$ " + product.getPrice());
-        System.out.println("Valor final da compra: " + "R$ " + valueSale);
-        System.out.println("Data e hora da compra: " + dateFormatted);
-        System.out.println("****************************");
+        System.out.println("- Vendedor:     " + vendor.getName());
+        System.out.println("- Comprador:    " + client.getName());
+        System.out.println("- Produto:      " + product.getDescription());
+        System.out.println("- Quantidade:   " + quantitySale);
+        System.out.println("- Valor Unitário: " + "R$ " + product.getPrice());
+        System.out.println("- Valor final da compra: " + "R$ " + valueSale);
+        System.out.println("- Data e hora da compra: " + dateFormatted);
+        System.out.println();
+        System.out.println("*********************************************************");
+        System.out.println("*********************************************************");
         System.out.println();
     }
 
-    private void registerProduct() {
-        scanner.nextLine();
+    private void registerProduct() throws ExceptionUtil {
+        try {
+            if(product == null || product.) {
+                System.out.println("O sistema não possui produtos cadastrados, por favor adicione um produto abaixo.");
+            }
 
-        System.out.println("Informe a descrição do produto: ");
-        String descriptionProduct = scanner.nextLine();
+            scanner.nextLine();
 
-        System.out.println("Informe o preço do produto: ex.: R$ 2,50 ");
-        Double priceProduct = scanner.nextDouble();
+            if(product.getDescription() == null) {
+                System.out.println("Informe a descrição do produto: ");
+                String descriptionProduct = scanner.nextLine();
+                product.setDescription(descriptionProduct);
+            }
 
-        System.out.println("Informe o estoque do produto: ex.: 5  ");
-        Integer stockProduct = scanner.nextInt();
-        scanner.nextLine();
+            if(product.getPrice() == null) {
+                getPriceProduct();
+            }
+            if(product.getStock() == null) {
+                getStockProduct();
+            }
+            if(product.getCode() == null){
+                product.setCode(random.nextInt(1) + 1);
+            }
 
-        product = new Product(0, descriptionProduct, priceProduct, stockProduct);
-        product.setCode(random.nextInt());
-        System.out.println("Produto cadastrado:  ");
-        System.out.println(product.toString());
-        System.out.println();
+            System.out.println("Produto cadastrado:  ");
+            System.out.println(product.toString());
+            System.out.println();
+        } catch (ExceptionUtil e) {
+            System.out.println(e.getMessage());
+        } finally {
+            verifyStockProducts();
+        }
+    }
+
+    private void getStockProduct() throws ExceptionUtil {
+        try {
+            System.out.println("Informe o estoque do produto: ex.: 5  ");
+            Integer stockProduct = scanner.nextInt();
+            product.setStock(stockProduct);
+            scanner.nextLine();
+        } catch (InputMismatchException e) {
+            throw new ExceptionUtil(CodeErrors.ERROR_PRODUCT_STOCK.getDetail());
+        }
+    }
+
+    private void getPriceProduct() throws ExceptionUtil {
+        try {
+            System.out.println("Informe o preço do produto: ex.: R$ 2,50 ");
+            Double priceProduct = scanner.nextDouble();
+            scanner.nextLine();
+            product.setPrice(priceProduct);
+        } catch (InputMismatchException e) {
+            throw new ExceptionUtil(CodeErrors.ERROR_PRODUCT_PRICE.getDetail());
+        }
     }
 
     public void registerClient() {
@@ -156,25 +214,23 @@ public class Sales extends ExceptionUtil{
             System.out.println();
         } catch (ExceptionUtil e) {
             System.out.println(e.getErrorClient());
-
         }
-
     }
 
     private String registerGender(Scanner scanner, Object o) throws ExceptionUtil {
-        String gender = new String();
+        String gender = "";
         try {
             System.out.println("Digite o Gênero (Masculino ou Feminino): ");
             gender = scanner.nextLine().toLowerCase();
             validateGender(gender, o, scanner);
-        } catch (ExceptionUtil e){
+        } catch (ExceptionUtil e) {
             System.out.println(e.getErrorGender());
             registerGender(scanner, o);
         }
         return gender;
     }
 
-    private void validateGender(String gender, Object o, Scanner scanner) throws ExceptionUtil{
+    private void validateGender(String gender, Object o, Scanner scanner) throws ExceptionUtil {
 
         if (o instanceof Client client) {
             if (gender.equalsIgnoreCase("masculino")) {
@@ -184,7 +240,7 @@ public class Sales extends ExceptionUtil{
             } else {
                 throw new ExceptionUtil();
             }
-            if (client.getGender() == null){
+            if (client.getGender() == null) {
                 registerGender(scanner, o);
             }
         } else if (o instanceof Vendor vendor) {
@@ -195,7 +251,7 @@ public class Sales extends ExceptionUtil{
             } else {
                 throw new ExceptionUtil();
             }
-            if (vendor.getGender() == null){
+            if (vendor.getGender() == null) {
                 registerGender(scanner, o);
             }
         }
