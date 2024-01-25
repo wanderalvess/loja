@@ -52,14 +52,15 @@ public class Validations extends Sales {
         try {
             if (o instanceof Client client) {
                 System.out.println("Digite a idade do cliente: ");
-                age = scanner.nextBigDecimal();
-                scanner.nextLine();
+                Integer ageString = scanner.nextInt();
+                age = BigDecimal.valueOf(ageString);
             } else if (o instanceof Vendor vendor) {
-                System.out.println("Digite a idade do vendedor: ");
-                age = scanner.nextBigDecimal();
-                scanner.nextLine();
+                System.out.println("\nDigite a idade do vendedor: ");
+                Integer ageString = scanner.nextInt();
+                age = BigDecimal.valueOf(ageString);
+            } else {
+                throw new ExceptionUtil(CodeErrors.ERROR_AGE.getDetail());
             }
-            throw new ExceptionUtil(CodeErrors.ERROR_AGE.getDetail());
 
         } catch (InputMismatchException e) {
             System.out.println(e.getMessage());

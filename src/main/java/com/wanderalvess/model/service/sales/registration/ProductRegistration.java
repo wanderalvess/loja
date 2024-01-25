@@ -7,6 +7,7 @@ import com.wanderalvess.model.service.sales.Sales;
 import com.wanderalvess.model.service.validations.ValidationStockProduct;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
@@ -16,14 +17,12 @@ public class ProductRegistration extends Sales {
         Random random = new Random();
 
         try {
-            if (product == null) {
-                System.out.println("O sistema não possui produtos cadastrados, por favor adicione um produto abaixo.");
+            if (product.equals(new Product())) {
+                System.out.println("O sistema não possui produtos cadastrados, por favor adicione um produto abaixo.\n");
             }
 
-            scanner.nextLine();
-
             if (product.getDescription() == null) {
-                System.out.println("Informe a descrição do produto: ");
+                System.out.println("\nInforme a descrição do produto: ");
                 String descriptionProduct = scanner.nextLine();
                 product.setDescription(descriptionProduct);
             }
@@ -51,9 +50,9 @@ public class ProductRegistration extends Sales {
     private static void getPriceProduct(Product product, Scanner scanner) throws ExceptionUtil {
         try {
             System.out.println("Informe o preço do produto: ex.: 2,50 ");
-            BigDecimal priceProduct = scanner.nextBigDecimal();
-            scanner.nextLine();
-            product.setPrice(priceProduct);
+            Double priceProduct = scanner.nextDouble();
+            BigDecimal price = BigDecimal.valueOf(priceProduct);
+            product.setPrice(price.setScale(2, RoundingMode.HALF_UP));
         } catch (InputMismatchException e) {
             throw new ExceptionUtil(CodeErrors.ERROR_PRODUCT_PRICE.getDetail());
         }
