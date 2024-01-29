@@ -14,7 +14,6 @@ public class ClientRegistrationTest {
         Client client = new Client();
         Scanner scanner = new Scanner(System.in);
 
-
         String cpf = "09109109111";
         System.setIn(new ByteArrayInputStream(cpf.getBytes()));
         scanner = new Scanner(System.in);
@@ -42,6 +41,7 @@ public class ClientRegistrationTest {
         GenderRegistration.registerGender(scanner, client);
         System.out.println(client.toString());
         System.out.println("Cadastro finalizado");
+        System.out.println("Teste finalizado com sucesso");
 
     }
 

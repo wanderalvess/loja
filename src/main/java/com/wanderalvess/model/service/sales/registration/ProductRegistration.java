@@ -28,7 +28,7 @@ public class ProductRegistration extends Sales {
                 scanner.skip(".*\n");
             }
 
-            System.out.println("\n Informe a descrição do produto: ");
+            System.out.println("Informe a descrição do produto: ");
             String descriptionProduct = scanner.nextLine();
             product.setDescription(descriptionProduct);
 

@@ -35,6 +35,7 @@ public class VendorRegistrationTest {
         GenderRegistration.registerGender(scanner, vendor);
         System.out.println(vendor.toString());
         System.out.println("Cadastro finalizado");
+        System.out.println("Teste finalizado com sucesso");
 
     }
 }

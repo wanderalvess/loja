@@ -15,7 +15,7 @@ public class GenderRegistrationTest {
     @Test
     public void testRegisterGender() {
         try {
-            String input = "Masculino\nFeminino\n";
+            String input = "\nMasculino\n\nFeminino\n";
             System.setIn(new ByteArrayInputStream(input.getBytes()));
             Scanner scanner = new Scanner(System.in);
 
@@ -27,6 +27,7 @@ public class GenderRegistrationTest {
 
             GenderRegistration.registerGender(scanner, vendor);
             assertEquals(Gender.FEMALE, vendor.getGender());
+            System.out.println("Teste finalizado com sucesso");
 
         } catch (ExceptionUtil e) {
             System.out.println(e.getMessage());
