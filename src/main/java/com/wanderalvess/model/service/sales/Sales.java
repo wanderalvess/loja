@@ -7,27 +7,32 @@ import com.wanderalvess.exceptions.ExceptionUtil;
 import com.wanderalvess.model.service.sales.generation.GenerationReceipts;
 import com.wanderalvess.model.service.sales.registration.ClientRegistration;
 import com.wanderalvess.model.service.sales.registration.VendorRegistration;
-import com.wanderalvess.model.service.validations.ValidationStockProduct;
-import com.wanderalvess.model.service.validations.Validations;
+import com.wanderalvess.model.service.validations.ValidationProduct;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
+
+import static com.wanderalvess.model.service.validations.ValidationProduct.*;
 
 public class Sales extends ExceptionUtil {
     private Product product = new Product();
     private Client client = new Client();
     private Vendor vendor = new Vendor();
 
+
     Scanner scanner = new Scanner(System.in);
+
+    List<Product> listProducts = new ArrayList<>();
 
     public void initSales() throws InterruptedException, ExceptionUtil {
         try {
-            ValidationStockProduct.verifyStockProducts(product, scanner);
+            ValidationProduct.verifyStockProducts(listProducts, scanner);
 
             if (vendor.getName() == null) {
-                System.out.println("Para iniciar a venda de produtos, cadastre os dados do vendedor e do cliente: ");
                 VendorRegistration.registerVendor(vendor, scanner);
             }
 
@@ -51,25 +56,13 @@ public class Sales extends ExceptionUtil {
     private void processSaleProduct() {
         System.out.println("Iniciando processamento da venda de produtos...");
 
-        BigDecimal quantitySale = new BigDecimal(0);
-
         try {
             System.out.println();
-            System.out.println("Para vender o produto: " + product.getDescription()
-                    + ", digite a quantidade a ser comprada: " + "(Estoque: " + product.getStock() + ")");
-            System.out.println();
-            quantitySale = scanner.nextBigDecimal();
-
-            Validations.validateQuantityForSale(quantitySale, product);
+            System.out.println("Selecione qual produto deseja vender: ");
+            addProductToCart(listProducts, scanner);
+            addMoreProductToCart(listProducts, scanner, vendor, client);
         } catch (ExceptionUtil e) {
             System.out.println(e.getErrorSaleQuantityStock());
-        } finally {
-            BigDecimal newStock = product.getStock().subtract(quantitySale);
-            product.setStock(newStock);
-            calculateValueSale(quantitySale);
-
-            System.out.println("Nova quantidade do produto em estoque: " + product.getDescription() + " é de " + product.getStock());
-            System.out.println();
         }
     }
 
@@ -87,7 +80,7 @@ public class Sales extends ExceptionUtil {
         BigDecimal valueSale = product.getPrice().multiply(quantitySale);
         System.out.println("Preço unitário: " + "R$ " + product.getPrice() + ", quantidade comprada: " + quantitySale);
 
-        GenerationReceipts.printReceipt(quantitySale, valueSale, dateFormatted, vendor, client, product);
+        //GenerationReceipts.printReceipt(quantitySale, product.getPrice(), valueSale, dateFormatted, vendor, client, product);
     }
 
 

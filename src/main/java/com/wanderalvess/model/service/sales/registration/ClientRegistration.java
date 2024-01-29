@@ -19,7 +19,7 @@ public class ClientRegistration extends Sales {
             client.setName(scanner.nextLine());
             client.setAge(validateAge(scanner, client));
 
-            GenderRegistration.registerGender(scanner, client);
+            //GenderRegistration.registerGender(scanner, client);
 
             System.out.println("Os dados cadastrados são: ");
             System.out.println(client.toString());

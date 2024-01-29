@@ -14,8 +14,8 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Validations extends Sales {
-    public static void validateQuantityForSale(BigDecimal quantitySale, Product product) throws ExceptionUtil {
-        if (quantitySale.compareTo(product.getStock()) < 0) {
+    public static void validateQuantityForSale(BigDecimal quantitySale, Product selectedProduct) throws ExceptionUtil {
+        if (quantitySale.compareTo(selectedProduct.getStock()) > 0) {
             throw new ExceptionUtil(CodeErrors.ERROR_SALE_QUANTITY_STOCK.toString());
         }
     }
