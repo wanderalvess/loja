@@ -19,6 +19,7 @@ public class ProductRegistration extends Sales {
         try {
             if (product.equals(new Product())) {
                 System.out.println("O sistema não possui produtos cadastrados, por favor adicione um produto abaixo.\n");
+                scanner.skip(".*\n");
             }
 
             if (product.getDescription() == null) {

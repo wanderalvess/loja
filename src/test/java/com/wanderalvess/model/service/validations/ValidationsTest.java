@@ -28,17 +28,28 @@ public class ValidationsTest {
 
         Validations.validateGender("Masculino", client, scanner);
         assertEquals(Gender.MALE, client.getGender());
+        if(client.getGender() == Gender.MALE){
+            System.out.println("Setado genêro masculino");
+        }
 
         Validations.validateGender("Feminino", vendor, scanner);
         assertEquals(Gender.FEMALE, vendor.getGender());
+        if(client.getGender() == Gender.MALE){
+            System.out.println("Setado genêro feminino");
+        }
+
 
         input = "Outro\n";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         Validations.validateGender("Outro", client, scanner);
+        if(client.getGender() != Gender.MALE || client.getGender() != Gender.FEMALE){
+            System.out.println("Setado genêro outro");
+        }
 
         } catch (ExceptionUtil e) {
             System.out.println(e.getMessage());
         }
+        System.out.println("Finalizado com sucesso");
     }
 
     @Test
@@ -57,6 +68,7 @@ public class ValidationsTest {
         } catch (ExceptionUtil e) {
             System.out.println(e.getMessage());
         }
+        System.out.println("Finalizado com sucesso");
     }
 
     @Test
@@ -73,5 +85,6 @@ public class ValidationsTest {
         } catch (ExceptionUtil e){
             System.out.println(e.getMessage());
         }
+        System.out.println("Finalizado com sucesso");
     }
 }

@@ -27,6 +27,8 @@ public class Validations extends Sales {
                 client.setGender(Gender.MALE);
             } else if (gender.equalsIgnoreCase("feminino")) {
                 client.setGender(Gender.FEMALE);
+            } else if (gender.equalsIgnoreCase("outro")) {
+                client.setGender(Gender.OTHER);
             } else {
                 throw new ExceptionUtil();
             }
@@ -38,6 +40,8 @@ public class Validations extends Sales {
                 vendor.setGender(Gender.MALE);
             } else if (gender.equalsIgnoreCase("feminino")) {
                 vendor.setGender(Gender.FEMALE);
+            } else if (gender.equalsIgnoreCase("outro")) {
+                vendor.setGender(Gender.OTHER);
             } else {
                 throw new ExceptionUtil();
             }
@@ -55,7 +59,7 @@ public class Validations extends Sales {
                 Integer ageString = scanner.nextInt();
                 age = BigDecimal.valueOf(ageString);
             } else if (o instanceof Vendor vendor) {
-                System.out.println("\nDigite a idade do vendedor: ");
+                System.out.println("\nDigite a idade do vendedor:");
                 Integer ageString = scanner.nextInt();
                 age = BigDecimal.valueOf(ageString);
             } else {

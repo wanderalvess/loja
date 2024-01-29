@@ -11,6 +11,7 @@ public class GenderRegistration extends Sales {
     public static void registerGender(Scanner scanner, Object o) throws ExceptionUtil {
         try {
             System.out.println("Digite o Gênero (Masculino ou Feminino): ");
+            scanner.skip(".*\n");
             String gender = scanner.nextLine().toLowerCase();
             Validations.validateGender(gender, o, scanner);
         } catch (ExceptionUtil e) {
