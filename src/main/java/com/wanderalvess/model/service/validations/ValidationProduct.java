@@ -1,10 +1,10 @@
 package com.wanderalvess.model.service.validations;
 
+import com.wanderalvess.exceptions.ExceptionUtil;
 import com.wanderalvess.model.entity.Client;
 import com.wanderalvess.model.entity.Product;
 import com.wanderalvess.model.entity.Vendor;
 import com.wanderalvess.model.enums.CodeErrors;
-import com.wanderalvess.exceptions.ExceptionUtil;
 import com.wanderalvess.model.service.sales.Cart;
 import com.wanderalvess.model.service.sales.Sales;
 

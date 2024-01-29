@@ -1,7 +1,7 @@
 package com.wanderalvess.model.service.sales.registration;
 
-import com.wanderalvess.model.entity.Client;
 import com.wanderalvess.exceptions.ExceptionUtil;
+import com.wanderalvess.model.entity.Client;
 import com.wanderalvess.model.service.sales.Sales;
 
 import java.util.Scanner;

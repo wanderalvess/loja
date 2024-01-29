@@ -23,7 +23,6 @@ public class Sales extends ExceptionUtil {
     private Client client = new Client();
     private Vendor vendor = new Vendor();
 
-
     Scanner scanner = new Scanner(System.in);
 
     List<Product> listProducts = new ArrayList<>();

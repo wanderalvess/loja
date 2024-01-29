@@ -1,7 +1,7 @@
 package com.wanderalvess.model.service.sales.registration;
 
-import com.wanderalvess.model.entity.Vendor;
 import com.wanderalvess.exceptions.ExceptionUtil;
+import com.wanderalvess.model.entity.Vendor;
 import com.wanderalvess.model.service.sales.Sales;
 import com.wanderalvess.model.service.validations.Validations;
 

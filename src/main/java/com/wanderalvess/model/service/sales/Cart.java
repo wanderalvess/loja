@@ -14,7 +14,8 @@ import java.util.Date;
 import java.util.List;
 
 public class Cart {
-    private static List<CartItems> cartItems = new ArrayList<>();;
+    private static List<CartItems> cartItems = new ArrayList<>();
+    ;
 
     public Cart() {
         this.cartItems = new ArrayList<>();
@@ -41,7 +42,7 @@ public class Cart {
             quantitySale = quantitySale.add(item.getQuantity());
             nameProduct.append(item.getProduct().getDescription()).append(", ");
             System.out.println((i + 1) + ". " + item.getProduct().getDescription() + " - Quantidade: "
-                    + item.getQuantity() + ", Valor unitário: " + item.getProduct().getPrice() );
+                    + item.getQuantity() + ", Valor unitário: " + item.getProduct().getPrice());
 
         }
 

@@ -1,8 +1,7 @@
 package com.wanderalvess.model.service.sales.registration;
 
-import com.wanderalvess.model.entity.Product;
-import com.wanderalvess.model.enums.CodeErrors;
 import com.wanderalvess.exceptions.ExceptionUtil;
+import com.wanderalvess.model.entity.Product;
 import com.wanderalvess.model.service.sales.Sales;
 import com.wanderalvess.model.service.validations.ValidationProduct;
 
@@ -24,7 +23,7 @@ public class ProductRegistration extends Sales {
             if (listProducts.isEmpty()) {
                 System.out.println("O sistema não possui produtos cadastrados, por favor adicione um produto abaixo.\n");
                 scanner.skip(".*\n");
-            } else{
+            } else {
                 System.out.println("Produtos já cadastrados: " + listProducts.toString() + "\n");
                 scanner.skip(".*\n");
             }

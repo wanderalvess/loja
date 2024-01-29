@@ -5,7 +5,6 @@ import com.wanderalvess.model.entity.Client;
 import com.wanderalvess.model.entity.Product;
 import com.wanderalvess.model.entity.Vendor;
 import com.wanderalvess.model.enums.Gender;
-import com.wanderalvess.model.service.sales.Sales;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
@@ -19,32 +18,32 @@ public class ValidationsTest {
     @Test
     public void testValidateGender() throws ExceptionUtil {
         try {
-        Client client = new Client();
-        Vendor vendor = new Vendor();
+            Client client = new Client();
+            Vendor vendor = new Vendor();
 
-        String input = "Masculino\n";
-        System.setIn(new ByteArrayInputStream(input.getBytes()));
-        Scanner scanner = new Scanner(System.in);
+            String input = "Masculino\n";
+            System.setIn(new ByteArrayInputStream(input.getBytes()));
+            Scanner scanner = new Scanner(System.in);
 
-        Validations.validateGender("Masculino", client, scanner);
-        assertEquals(Gender.MALE, client.getGender());
-        if(client.getGender() == Gender.MALE){
-            System.out.println("Setado genêro masculino");
-        }
+            Validations.validateGender("Masculino", client, scanner);
+            assertEquals(Gender.MALE, client.getGender());
+            if (client.getGender() == Gender.MALE) {
+                System.out.println("Setado genêro masculino");
+            }
 
-        Validations.validateGender("Feminino", vendor, scanner);
-        assertEquals(Gender.FEMALE, vendor.getGender());
-        if(client.getGender() == Gender.MALE){
-            System.out.println("Setado genêro feminino");
-        }
+            Validations.validateGender("Feminino", vendor, scanner);
+            assertEquals(Gender.FEMALE, vendor.getGender());
+            if (client.getGender() == Gender.MALE) {
+                System.out.println("Setado genêro feminino");
+            }
 
 
-        input = "Outro\n";
-        System.setIn(new ByteArrayInputStream(input.getBytes()));
-        Validations.validateGender("Outro", client, scanner);
-        if(client.getGender() != Gender.MALE || client.getGender() != Gender.FEMALE){
-            System.out.println("Setado genêro outro");
-        }
+            input = "Outro\n";
+            System.setIn(new ByteArrayInputStream(input.getBytes()));
+            Validations.validateGender("Outro", client, scanner);
+            if (client.getGender() != Gender.MALE || client.getGender() != Gender.FEMALE) {
+                System.out.println("Setado genêro outro");
+            }
 
         } catch (ExceptionUtil e) {
             System.out.println(e.getMessage());
@@ -82,7 +81,7 @@ public class ValidationsTest {
             BigDecimal quantitySale = new BigDecimal("15");
 
             Validations.validateQuantityForSale(quantitySale, product);
-        } catch (ExceptionUtil e){
+        } catch (ExceptionUtil e) {
             System.out.println(e.getMessage());
         }
         System.out.println("Finalizado com sucesso");

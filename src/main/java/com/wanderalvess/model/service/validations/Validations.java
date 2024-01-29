@@ -1,13 +1,13 @@
 package com.wanderalvess.model.service.validations;
 
+import com.wanderalvess.exceptions.ExceptionUtil;
 import com.wanderalvess.model.entity.Client;
 import com.wanderalvess.model.entity.Product;
 import com.wanderalvess.model.entity.Vendor;
 import com.wanderalvess.model.enums.CodeErrors;
 import com.wanderalvess.model.enums.Gender;
-import com.wanderalvess.exceptions.ExceptionUtil;
-import com.wanderalvess.model.service.sales.registration.GenderRegistration;
 import com.wanderalvess.model.service.sales.Sales;
+import com.wanderalvess.model.service.sales.registration.GenderRegistration;
 
 import java.math.BigDecimal;
 import java.util.InputMismatchException;

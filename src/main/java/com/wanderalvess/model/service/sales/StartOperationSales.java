@@ -1,7 +1,7 @@
 package com.wanderalvess.model.service.sales;
 
-import com.wanderalvess.model.enums.CodeErrors;
 import com.wanderalvess.exceptions.ExceptionUtil;
+import com.wanderalvess.model.enums.CodeErrors;
 
 import java.util.Scanner;
 
