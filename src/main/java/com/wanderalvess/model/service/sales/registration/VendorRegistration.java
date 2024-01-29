@@ -20,7 +20,7 @@ public class VendorRegistration extends Sales {
         vendor.setName(scanner.nextLine());
         vendor.setAge(Validations.validateAge(scanner, vendor));
 
-        //registerGender(scanner, vendor);
+        registerGender(scanner, vendor);
 
         System.out.println("Os dados cadastrados são: ");
         System.out.println(vendor.toString());
